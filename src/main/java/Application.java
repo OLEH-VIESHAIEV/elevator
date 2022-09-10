@@ -13,16 +13,16 @@ import service.impl.GeneratorImpl;
 public class Application {
     private static final Integer MIN_FLOOR = 5;
     private static final Integer MAX_FLOOR = 20;
+
     public static void main(String[] args) {
         Generator generator = new GeneratorImpl();
         Integer floorQuantity = generator.generateFloorQuantity(MIN_FLOOR, MAX_FLOOR);
-        BuildingService buildingService = new BuildingServiceImpl(generator);
-        Building building = buildingService.create(floorQuantity);
-        FloorService floorService = new FloorServiceImpl(generator);
+        BuildingService buildingService = new BuildingServiceImpl();
+        Building building = buildingService.create(floorQuantity);//
+        FloorService floorService = new FloorServiceImpl();
         floorService.generatePassengersOnFloor(building.getFloors());
         List<Floor> floors = building.getFloors();
-        ElevatorService elevatorService = new ElevatorServiceImpl(generator);
+        ElevatorService elevatorService = new ElevatorServiceImpl();
         elevatorService.run(floors);
-
     }
 }

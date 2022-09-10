@@ -1,20 +1,24 @@
 package service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Building;
+import model.Floor;
 import service.BuildingService;
-import service.Generator;
 
 public class BuildingServiceImpl implements BuildingService {
-    private final Generator generator;
-
-    public BuildingServiceImpl(Generator generator) {
-        this.generator = generator;
-    }
-
     @Override
     public Building create(Integer quantityFloors) {
         Building building = new Building(quantityFloors);
-        building.setFloors(generator.generateFloors(building));
+        building.setFloors(generateFloors(building));
         return building;
+    }
+
+    private List<Floor> generateFloors(Building building) {
+        List<Floor> floors = new ArrayList<>();
+        for (int i = 1; i <= building.getTotalNumberOfFloors(); i++) {
+            floors.add(new Floor(i));
+        }
+        return floors;
     }
 }
