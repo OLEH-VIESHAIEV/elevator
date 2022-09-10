@@ -11,15 +11,10 @@ import service.ElevatorService;
 import service.Generator;
 
 public class ElevatorServiceImpl implements ElevatorService {
-    private final Generator generator;
     private static final Integer MAX_PASSENGERS = 5;
     private static final Integer FIRST_FLOOR = 1;
     private static int[] direct = new int[MAX_PASSENGERS];
     private static int[][] arrDisplay;
-
-    public ElevatorServiceImpl(Generator generator) {
-        this.generator = generator;
-    }
 
     @Override
     public void run(List<Floor> floors) {
@@ -53,7 +48,7 @@ public class ElevatorServiceImpl implements ElevatorService {
 
             passengers = passengersOut(elevator.getPassengersInside(), floor.getNumber());
             for (Passenger passenger : passengers) {
-                passenger.setRequiredFloor(generator.generateFloorForPassenger(FIRST_FLOOR,
+                passenger.setRequiredFloor(Generator.generateFloorForPassenger(FIRST_FLOOR,
                         floors.size(), passenger.getRequiredFloor()));
             }
             elevator.getPassengersInside().removeAll(passengers);

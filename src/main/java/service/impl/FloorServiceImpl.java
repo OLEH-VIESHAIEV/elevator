@@ -10,14 +10,9 @@ import service.FloorService;
 import service.Generator;
 
 public class FloorServiceImpl implements FloorService {
-    private final Generator generator;
     private static final Integer MIN_ON_FLOOR = 0;
     private static final Integer MAX_ON_FLOOR = 10;
     private static final Integer FIRST_FLOOR = 1;
-
-    public FloorServiceImpl(Generator generator) {
-        this.generator = generator;
-    }
 
     @Override
     public void generatePassengersOnFloor(List<Floor> floors) {
@@ -30,7 +25,7 @@ public class FloorServiceImpl implements FloorService {
             List<Passenger> passengersOnFloor = new ArrayList<>();
             for (int j = 0; j < passengerQuantity; j++) {
                 Passenger passenger = new Passenger();
-                passenger.setRequiredFloor(generator
+                passenger.setRequiredFloor(Generator
                         .generateFloorForPassenger(FIRST_FLOOR,
                                 floors.size(), floors.get(i).getNumber()));
                 passenger.setTimeWaiting(LocalDateTime.now());
